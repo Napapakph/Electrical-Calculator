@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Plus, Trash2, Calculator, Calendar, Settings, Download, Upload, Database } from 'lucide-react';
+import { Plus, Trash2, Calculator, Calendar, Settings, Download, Upload, Database, Zap } from 'lucide-react';
 import DatabaseService from './DatabaseService';
 import './ElectricityCalculator.css';
+import MeterReading from './MeterReading';
 
 const ElectricityCalculator = () => {
   // Initialize database service (can switch between 'localStorage', 'api', 'firebase')
   const [dbService] = useState(new DatabaseService('localStorage'));
+  
+  // State for current view (either 'calculator' or 'meterReading')
+  const [currentView, setCurrentView] = useState('calculator');
   
   // State for equipment list
   const [equipment, setEquipment] = useState([]);
@@ -275,6 +279,15 @@ const ElectricityCalculator = () => {
     }
   };
 
+  // Navigation functions
+  const showMeterReading = () => {
+    setCurrentView('meterReading');
+  };
+
+  const showCalculator = () => {
+    setCurrentView('calculator');
+  };
+
   const dailyCost = calculateDailyCost();
   const monthlyData = getMonthlyData();
 
@@ -287,8 +300,43 @@ const ElectricityCalculator = () => {
     );
   }
 
+  // Render MeterReading component if currentView is 'meterReading'
+  if (currentView === 'meterReading') {
+    return (
+      <div>
+        {/* Navigation bar for MeterReading */}
+        <div className="navigation-bar" style={{ 
+          padding: '15px 20px', 
+          backgroundColor: '#f8f9fa', 
+          borderBottom: '1px solid #dee2e6',
+          marginBottom: '20px'
+        }}>
+          <button 
+            onClick={showCalculator}
+            className="nav-button"
+            style={{
+              padding: '8px 16px',
+              backgroundColor: '#6c757d',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px'
+            }}
+          >
+            <Calculator size={16} />
+            Back to Calculator
+          </button>
+        </div>
+        <MeterReading />
+      </div>
+    );
+  }
+
+  // Render main calculator component
   return (
-    
     <div className="calculator-container">
       {error && (
         <div className="error-message">
@@ -308,6 +356,18 @@ const ElectricityCalculator = () => {
         
         {/* Database Controls */}
         <div className="database-controls">
+          <button 
+            onClick={showMeterReading} 
+            className="db-button meter-reading-button" 
+            style={{ 
+              marginRight: '12px',
+              backgroundColor: '#17a2b8',
+              color: 'white'
+            }}
+          >
+            <Zap className="button-icon" />
+            Meter Reading
+          </button>
           <button onClick={exportData} className="db-button export-button" style={{ marginRight: '12px' }}>
             <Download className="button-icon" />
             Export Data
