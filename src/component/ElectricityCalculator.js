@@ -37,12 +37,20 @@ const ElectricityCalculator = () => {
     loadDataFromDatabase();
   }, []);
 
+  // Database operations
+  const saveEquipmentToDatabase = React.useCallback(async () => {
+    const result = await dbService.saveEquipment(equipment);
+    if (!result.success) {
+      console.error('Failed to save equipment:', result.error);
+    }
+  }, [dbService, equipment]);
+
   // Auto-save when data changes
   useEffect(() => {
     if (equipment.length > 0) {
       saveEquipmentToDatabase();
     }
-  }, [equipment]);
+  }, [equipment, saveEquipmentToDatabase]);
 
   useEffect(() => {
     if (usageHistory.length > 0) {
@@ -54,7 +62,6 @@ const ElectricityCalculator = () => {
     saveBillingSettingsToDatabase();
   }, [billing]);
 
-  // Database operations
   const loadDataFromDatabase = async () => {
     setIsLoading(true);
     setError('');
@@ -87,13 +94,6 @@ const ElectricityCalculator = () => {
       setError('Failed to load data from database');
     } finally {
       setIsLoading(false);
-    }
-  };
-
-  const saveEquipmentToDatabase = async () => {
-    const result = await dbService.saveEquipment(equipment);
-    if (!result.success) {
-      console.error('Failed to save equipment:', result.error);
     }
   };
 
