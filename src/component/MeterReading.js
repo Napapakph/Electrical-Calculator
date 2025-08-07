@@ -174,7 +174,7 @@ const MeterReading = () => {
       <div className="meter-header">
         <h1 className="meter-title">
           <Zap className="meter-icon" />
-          ระบบอ่านมิเตอร์ไฟฟ้า
+          METER MONITOR SYSTEM
         </h1>
         <p className="meter-subtitle">บันทึกและติดตามการใช้ไฟฟ้าจากมิเตอร์</p>
       </div>
