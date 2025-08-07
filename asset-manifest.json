@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Electrical-Calculator/static/css/main.7a83aba3.css",
+    "main.js": "/Electrical-Calculator/static/js/main.3b508cda.js",
+    "static/js/453.28aa6c9d.chunk.js": "/Electrical-Calculator/static/js/453.28aa6c9d.chunk.js",
+    "index.html": "/Electrical-Calculator/index.html",
+    "main.7a83aba3.css.map": "/Electrical-Calculator/static/css/main.7a83aba3.css.map",
+    "main.3b508cda.js.map": "/Electrical-Calculator/static/js/main.3b508cda.js.map",
+    "453.28aa6c9d.chunk.js.map": "/Electrical-Calculator/static/js/453.28aa6c9d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7a83aba3.css",
+    "static/js/main.3b508cda.js"
+  ]
+}
